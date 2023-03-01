@@ -1,6 +1,9 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import "./App.css";
+import ErrorAlert from "./components/ErrorAlert";
+import LoadingAlert from "./components/LoadingAlert";
+import TrainingAlert from "./components/TrainingAlert";
 
 function App() {
     const API_URL = "https://flask-production-3edb.up.railway.app";
@@ -8,6 +11,14 @@ function App() {
     const [customerID, setCustomerID] = useState<string>("");
     const [recommendation, setRecommendation] = useState<Array<any>>([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [isTraining, setIsTraining] = useState(false);
+
+    useEffect(() => {
+        setTimeout(() => {
+            setIsError(false);
+        }, 5000);
+    }, [isError]);
 
     const getRecommendation = () => {
         setIsLoading(true);
@@ -25,19 +36,22 @@ function App() {
             .catch((err) => {
                 console.error(err);
                 setIsLoading(false);
+                setIsError(true);
             });
     };
 
     const trainModel = () => {
-        setIsLoading(true);
+        setIsTraining(true);
         axios
             .post(API_URL + "/train")
             .then((res) => {
                 console.log(res);
-                setIsLoading(false);
+                setIsTraining(false);
             })
             .catch((err) => {
                 console.error(err);
+                setIsTraining(false);
+                setIsError(true);
             });
     };
 
@@ -62,32 +76,11 @@ function App() {
                 </div>
 
                 {isLoading ? (
-                    <div
-                        className="flex p-4 my-4 text-sm text-blue-800 rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
-                        role="alert"
-                    >
-                        <svg
-                            aria-hidden="true"
-                            className="flex-shrink-0 inline w-5 h-5 mr-3"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg"
-                        >
-                            <path
-                                fill-rule="evenodd"
-                                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                                clip-rule="evenodd"
-                            ></path>
-                        </svg>
-                        <span className="sr-only">Info</span>
-                        <div>
-                            <span className="font-medium">
-                                Recommending Item!
-                            </span>{" "}
-                            Please Wait a minute while we process the
-                            recommendation..
-                        </div>
-                    </div>
+                    <LoadingAlert></LoadingAlert>
+                ) : isError ? (
+                    <ErrorAlert></ErrorAlert>
+                ) : isTraining ? (
+                    <TrainingAlert></TrainingAlert>
                 ) : (
                     <></>
                 )}

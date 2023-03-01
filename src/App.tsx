@@ -36,9 +36,7 @@ function App() {
                 CustomerID: parseInt(customerID),
             })
             .then((res) => {
-                if (res.data.predictions) {
-                    setRecommendation([...res.data.prediction]);
-                }
+                setRecommendation([...res.data.prediction]);
                 console.log(recommendation);
                 setIsLoading(false);
             })

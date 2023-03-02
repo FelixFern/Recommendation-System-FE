@@ -126,10 +126,10 @@ function App() {
     };
 
     return (
-        <div className="bg-zinc-800 h-screen w-screen overflow-hidden">
-            <div className="w-10/12 mt-0 mx-auto">
-                <div className="flex items-center gap-2 w-full justify-between mt-6 pb-5 border-b-2">
-                    <h1 className="font-bold text-zinc-200 text-left text-xl rounded-md">
+        <div className="w-screen h-screen overflow-hidden bg-zinc-800">
+            <div className="w-10/12 mx-auto mt-0">
+                <div className="flex items-center justify-between w-full gap-2 pb-5 mt-6 border-b-2 ">
+                    <h1 className="text-xl font-bold text-left rounded-md text-zinc-200">
                         Recommendation System
                         <p className="text-xs text-blue-200">
                             Project by Moch. Nabil Farras (Backend) and Felix
@@ -158,15 +158,15 @@ function App() {
                     <></>
                 )}
 
-                <h2 className="font-bold text-white mt-4">
+                <h2 className="mt-4 font-bold text-white">
                     Recommend Item to User
                 </h2>
                 <div className="flex gap-4">
-                    <form className="bg-slate-600 p-4 my-2 rounded-md w-1/3">
+                    <form className="w-1/3 p-4 my-2 rounded-md bg-slate-600">
                         <label className="block mb-2 text-sm font-medium text-white">
                             Recommend Item
                         </label>
-                        <div className="w-1/1 flex items-center gap-2">
+                        <div className="flex items-center gap-2 w-1/1">
                             <input
                                 value={customerID}
                                 onChange={(e: any) => {
@@ -187,12 +187,12 @@ function App() {
                             </button>
                         </div>
                     </form>
-                    <div className="bg-slate-600 p-4 my-2 rounded-md flex-1">
-                        <p className="text-white font-medium text-md">
+                    <div className="flex-1 p-4 my-2 rounded-md bg-slate-600">
+                        <p className="font-medium text-white text-md">
                             Recommended Item Code :{" "}
                         </p>
                         {recommendation?.length === 0 ? (
-                            <p className="text-white text-sm">
+                            <p className="text-sm text-white">
                                 No recommendation yet
                             </p>
                         ) : (
@@ -201,7 +201,7 @@ function App() {
                                     (rec: string, index: number) => {
                                         return (
                                             <li
-                                                className="text-white text-sm"
+                                                className="text-sm text-white"
                                                 key={index}
                                             >
                                                 {rec}
@@ -215,14 +215,14 @@ function App() {
                 </div>
                 <div className="flex gap-8">
                     <div className="flex-1 w-full">
-                        <h2 className="font-bold text-white mt-2">
+                        <h2 className="mt-2 font-bold text-white">
                             Add Customer Data
                         </h2>
-                        <form className="bg-slate-600 p-4 my-2 rounded-md w-full">
+                        <form className="w-full p-4 my-2 rounded-md bg-slate-600">
                             <label className="block mb-2 text-sm font-medium text-white">
                                 Customer ID
                             </label>
-                            <div className="w-1/1 flex items-center gap-2">
+                            <div className="flex items-center gap-2 w-1/1">
                                 <input
                                     value={addCustomerID}
                                     onChange={(e: any) => {
@@ -243,10 +243,10 @@ function App() {
                                 </button>
                             </div>
                         </form>
-                        <h2 className="font-bold text-white mt-4">
+                        <h2 className="mt-4 font-bold text-white">
                             Add Stock Data
                         </h2>
-                        <form className="bg-slate-600 p-4 my-2 rounded-md w-fuil">
+                        <form className="p-4 my-2 rounded-md bg-slate-600 w-fuil">
                             <div className="flex flex-col gap-2">
                                 <div className="w-full">
                                     <label className="flex-1 block mb-2 text-sm font-medium text-white">
@@ -292,10 +292,10 @@ function App() {
                     </div>
 
                     <div className="flex-1">
-                        <h2 className="font-bold text-white mt-2">
+                        <h2 className="mt-2 font-bold text-white">
                             Add Transaction
                         </h2>
-                        <form className="bg-slate-600 p-4 my-2 rounded-md w-fuil">
+                        <form className="p-4 my-2 rounded-md bg-slate-600 w-fuil">
                             <div className="flex flex-col gap-2">
                                 <div className="w-full">
                                     <label className="flex-1 block mb-2 text-sm font-medium text-white">

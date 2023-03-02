@@ -21,8 +21,8 @@ const SuccessAlert = () => {
             </svg>
             <span className="sr-only">Info</span>
             <div>
-                <span className="font-medium">Success alert!</span> Change a few
-                things up and try submitting again.
+                <span className="font-medium">Success alert!</span> the
+                operation has been done succesfully
             </div>
         </div>
     );

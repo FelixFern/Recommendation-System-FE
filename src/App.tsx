@@ -14,7 +14,6 @@ function App() {
     const [addCustomerID, setAddCustomerID] = useState<string>("");
     const [stockCode, setStockCode] = useState<string>("");
     const [itemDesc, setItemDesc] = useState<string>("");
-    const [stockDataStockCode, setStockDataStockCode] = useState<string>("");
     const [transCustomerID, setTransCustomerID] = useState<string>("");
     const [transStockCode, setTransStockCode] = useState<string>("");
     const [transQty, setTransQty] = useState<number>(0);
@@ -41,8 +40,8 @@ function App() {
             })
             .then((res) => {
                 setRecommendation([...res.data.prediction]);
-                console.log(recommendation);
                 setIsLoading(false);
+                setCustomerID("");
             })
             .catch((err) => {
                 console.error(err);
@@ -60,6 +59,7 @@ function App() {
             .then((res) => {
                 setIsLoading(false);
                 setIsSuccess(true);
+                setAddCustomerID("");
             })
             .catch((err) => {
                 console.log(err);
@@ -68,9 +68,47 @@ function App() {
             });
     };
 
-    const addStockData = () => {};
+    const addStockData = () => {
+        setIsLoading(true);
+        axios
+            .post(API_URL + "/updateStocks", {
+                StockCode: parseInt(stockCode),
+                Desciption: itemDesc,
+            })
+            .then((res) => {
+                setIsLoading(false);
+                setIsSuccess(true);
+                setStockCode("");
+                setItemDesc("");
+            })
+            .catch((err) => {
+                console.log(err);
+                setIsLoading(false);
+                setIsError(true);
+            });
+    };
 
-    const addTransaction = () => {};
+    const addTransaction = () => {
+        setIsLoading(true);
+        axios
+            .post(API_URL + "/updateTransactions", {
+                CustomerID: parseInt(transCustomerID),
+                StockCode: parseInt(transStockCode),
+                value: transQty,
+            })
+            .then((res) => {
+                setIsLoading(false);
+                setIsSuccess(true);
+                setTransCustomerID("");
+                setTransStockCode("");
+                setTransQty(0);
+            })
+            .catch((err) => {
+                console.log(err);
+                setIsLoading(false);
+                setIsError(true);
+            });
+    };
 
     const trainModel = () => {
         setIsTraining(true);

@@ -3,7 +3,7 @@ import React from "react";
 const TrainingAlert = () => {
     return (
         <div
-            className="flex p-4 my-4 text-sm text-blue-800 border border-blue-300 selection:rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+            className="flex p-4 my-4 text-sm text-blue-800 border border-blue-300 rounded-lg selection:rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
             role="alert"
         >
             <svg

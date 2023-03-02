@@ -1,7 +1,9 @@
-const LoadingAlert = () => {
+import React from "react";
+
+const SuccessAlert = () => {
     return (
         <div
-            className="flex p-4 my-4 text-sm text-blue-800 border rounded-lg border-blue-300 selection:rounded-lg bg-blue-50 dark:bg-gray-800 dark:text-blue-400"
+            className="flex p-4 my-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800"
             role="alert"
         >
             <svg
@@ -19,11 +21,11 @@ const LoadingAlert = () => {
             </svg>
             <span className="sr-only">Info</span>
             <div>
-                <span className="font-medium">Recommending Item!</span> Please
-                Wait a minute while we process the recommendation..
+                <span className="font-medium">Success alert!</span> Change a few
+                things up and try submitting again.
             </div>
         </div>
     );
 };
 
-export default LoadingAlert;
+export default SuccessAlert;

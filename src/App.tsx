@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import ErrorAlert from "./components/ErrorAlert";
 import LoadingAlert from "./components/LoadingAlert";
+import SuccessAlert from "./components/SuccessAlert";
 import TrainingAlert from "./components/TrainingAlert";
 
 function App() {
@@ -18,15 +19,18 @@ function App() {
     const [transStockCode, setTransStockCode] = useState<string>("");
     const [transQty, setTransQty] = useState<number>(0);
     const [recommendation, setRecommendation] = useState<Array<any>>([]);
+
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isTraining, setIsTraining] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
     useEffect(() => {
         setTimeout(() => {
             setIsError(false);
+            setIsSuccess(false);
         }, 5000);
-    }, [isError]);
+    }, [isError, isSuccess]);
 
     // Function
     const getRecommendation = () => {
@@ -47,7 +51,22 @@ function App() {
             });
     };
 
-    const addCustomerData = () => {};
+    const addCustomerData = () => {
+        setIsLoading(true);
+        axios
+            .post(API_URL + "/updateUsers", {
+                CustomerID: parseInt(addCustomerID),
+            })
+            .then((res) => {
+                setIsLoading(false);
+                setIsSuccess(true);
+            })
+            .catch((err) => {
+                console.log(err);
+                setIsLoading(false);
+                setIsError(true);
+            });
+    };
 
     const addStockData = () => {};
 
@@ -95,6 +114,8 @@ function App() {
                     <ErrorAlert></ErrorAlert>
                 ) : isTraining ? (
                     <TrainingAlert></TrainingAlert>
+                ) : isSuccess ? (
+                    <SuccessAlert></SuccessAlert>
                 ) : (
                     <></>
                 )}
